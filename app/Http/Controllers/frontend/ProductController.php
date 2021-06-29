@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\frontend;
 
+use App\CustomClasses\Cart;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 
@@ -27,7 +28,20 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('frontend.single-product', $product);
+        return view('frontend.single-product', compact('product'));
+    }
+
+    public function addProduct(Product $product)
+    {
+        if (session()->has('cart')) {
+            $cart = new Cart(session()->get('cart'));
+        }else {
+            $cart = new Cart();
+        }
+
+        $cart->add($product);
+        session()->put('cart', $cart);
+        return redirect()->back();
     }
 
 }

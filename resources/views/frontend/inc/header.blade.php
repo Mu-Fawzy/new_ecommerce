@@ -103,7 +103,7 @@
 						<!-- ACCOUNT -->
 						<div class="col-md-3 clearfix">
 							<div class="header-ctn">
-								<!-- Wishlist -->
+								{{-- <!-- Wishlist -->
 								<div>
 									<a href="#">
 										<i class="fa fa-heart-o"></i>
@@ -111,14 +111,14 @@
 										<div class="qty">2</div>
 									</a>
 								</div>
-								<!-- /Wishlist -->
+								<!-- /Wishlist --> --}}
 
 								<!-- Cart -->
 								<div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
-										<div class="qty">3</div>
+										<div class="qty">{{ session()->has('cart') ? session()->get('cart')->totalQty : 0 }}</div>
 									</a>
 									<div class="cart-dropdown">
 										<div class="cart-list">

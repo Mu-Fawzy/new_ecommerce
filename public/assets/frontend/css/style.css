@@ -242,7 +242,7 @@ textarea.input {
 }
 
 .input-checkbox input[type="checkbox"]+label span:after {
-  content: '✔';
+  content: 'âœ”';
   position: absolute;
   top: -2px;
   left: 1px;
@@ -1039,7 +1039,8 @@ textarea.input {
 .product .add-to-cart .add-to-cart-btn {
   position: relative;
   border: 2px solid transparent;
-  height: 40px;
+  display: inline-flex;
+  line-height: 40px;
   padding: 0 30px;
   background-color: #ef233c;
   color: #FFF;
@@ -1048,6 +1049,7 @@ textarea.input {
   border-radius: 40px;
   -webkit-transition: 0.2s all;
   transition: 0.2s all;
+  flex-wrap: nowrap;
 }
 
 .product .add-to-cart .add-to-cart-btn>i {

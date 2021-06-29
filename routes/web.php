@@ -21,6 +21,7 @@ Route::get('/', function () {
 Route::group(['namespace' => 'frontend'], function() {
     Route::get('products', 'ProductController@index')->name('products.shop');
     Route::get('products/{product}', 'ProductController@show')->name('product.show');
+    Route::get('products/add/{product}', 'ProductController@addProduct')->name('product.add');
 });
 
 Route::group(['middleware' => 'auth'], function() {

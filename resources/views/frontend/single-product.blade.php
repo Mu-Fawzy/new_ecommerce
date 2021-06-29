@@ -1,9 +1,9 @@
 @extends('layouts.frontend.master')
 
-@section('title', 'single product')
+@section('title', $product->title)
 
 @section('content')
-
+	
 		<!-- BREADCRUMB -->
 		<div id="breadcrumb" class="section">
 			<!-- container -->
