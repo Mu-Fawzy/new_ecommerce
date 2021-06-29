@@ -30,8 +30,10 @@
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="{{ asset('assets/frontend/css/style.css') }}"/>
 
+		@yield('css')
+		
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!-- WARNING: Respond.js does not work if you view the page via file:// -->
 		<!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -120,39 +122,33 @@
 										<span>Your Cart</span>
 										<div class="qty">{{ session()->has('cart') ? session()->get('cart')->totalQty : 0 }}</div>
 									</a>
-									<div class="cart-dropdown">
-										<div class="cart-list">
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="{{ asset('assets/frontend/img/product01.png') }}" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
 
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="{{ asset('assets/frontend/img/product02.png') }}" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
+									@if (session()->has('cart'))
+										<div class="cart-dropdown">
+											<div class="cart-list">
+												@foreach (session()->get('cart')->items as $key=>$item)
+													<div class="product-widget">
+														<div class="product-img">
+															<img src="{{ $item['image'] }}" alt="{{ $item['title'] }}">
+														</div>
+														<div class="product-body">
+															<h3 class="product-name"><a href="#">{{ $item['title'] }}</a></h3>
+															<h4 class="product-price"><span class="qty">{{ $item['qty'] }}x</span>${{ $item['price'] }}</h4>
+														</div>
+														<button class="delete"><i class="fa fa-close"></i></button>
+													</div>
+												@endforeach
+											</div>
+											<div class="cart-summary">
+												<small>{{ session()->get('cart')->totalQty }} Item(s) selected</small>
+												<h5>SUBTOTAL: ${{ session()->get('cart')->totalPrice }}</h5>
+											</div>
+											<div class="cart-btns">
+												<a href="{{ route('cart') }}">View Cart</a>
+												<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 											</div>
 										</div>
-										<div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
-										</div>
-										<div class="cart-btns">
-											<a href="#">View Cart</a>
-											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
-										</div>
-									</div>
+									@endif
 								</div>
 								<!-- /Cart -->
 

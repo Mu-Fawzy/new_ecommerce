@@ -22,6 +22,7 @@ Route::group(['namespace' => 'frontend'], function() {
     Route::get('products', 'ProductController@index')->name('products.shop');
     Route::get('products/{product}', 'ProductController@show')->name('product.show');
     Route::get('products/add/{product}', 'ProductController@addProduct')->name('product.add');
+    Route::get('cart', 'CartController@index')->name('cart');
 });
 
 Route::group(['middleware' => 'auth'], function() {
