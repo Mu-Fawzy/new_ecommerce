@@ -12,6 +12,9 @@
 		table tr td{
 			border:1px solid #FFFFFF;    
 		}
+		form.float-left {
+			float: left;
+		}
 		
 	</style>
 @endsection
@@ -65,14 +68,21 @@
 													</tr>
 												</thead>
 												<tbody>
-													@foreach ($cart->items as $item)
+													@foreach ($cart->items as $key=>$item)
 														<tr>
 															<td><img src="{{ $item['image'] }}" class="img-cart"></td>
 															<td>
-															<form class="form-inline">
-																<input class="form-control" type="text" value="{{ $item['qty'] }}">
-																<button rel="tooltip" class="btn btn-default"><i class="fa fa-pencil"></i></button>
-																<a href="#" class="btn btn-primary"><i class="fa fa-trash-o"></i></a>
+															<form class="form-inline float-left" action="{{ route('product.update', $key) }}" method="POST">
+																@csrf
+																@method('put')
+																<input class="form-control" name="qty" type="text" value="{{ $item['qty'] }}">
+																<button type="submit" class="btn btn-default"><i class="fa fa-pencil"></i></button>
+															</form>
+															
+															<form class="form-inline float-left" action="{{ route('product.delete', $key) }}" method="POST">
+																@csrf
+																@method('delete')									
+																<button class="btn btn-primary" type="submit"><i class="fa fa-trash-o"></i></button>
 															</form>
 															</td>
 															<td>${{ $item['price'] }}</td>

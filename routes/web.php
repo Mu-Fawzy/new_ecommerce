@@ -23,6 +23,8 @@ Route::group(['namespace' => 'frontend'], function() {
     Route::get('products/{product}', 'ProductController@show')->name('product.show');
     Route::get('products/add/{product}', 'ProductController@addProduct')->name('product.add');
     Route::get('cart', 'CartController@index')->name('cart');
+    Route::put('product/{product}', 'CartController@update')->name('product.update');
+    Route::delete('product/{product}', 'CartController@delete')->name('product.delete');
 });
 
 Route::group(['middleware' => 'auth'], function() {
